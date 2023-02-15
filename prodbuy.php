@@ -34,8 +34,20 @@ while ($arrayp=mysqli_fetch_array($exeSQL))
     echo "<td style='border: 0px'>";
     echo "<p><h5>".$arrayp['prodName']."</h5>"; //display product name as contained in the array
     echo "<p>".$arrayp['prodDescripLong'];
-    echo "<p><b> &pound ".$arrayp['prodPrice']."</b>";
-    echo "<p> Qunatity Available: ".$arrayp['prodQuantity'];
+    echo "<p><b> &pound ".$arrayp['prodPrice']."</b></p>";
+    echo "<p><b>Left In Stock: ".$arrayp['prodQuantity']."</b>";
+
+    echo "<p>Number to be purchased: ";
+    //create form made of one text field and one button for user to enter quantity
+    //the value entered in the form will be posted to the basket.php to be processed
+    echo "<form action=basket.php method=post>";
+    echo "<input type=text name=p_quantity size=5 maxlength=3>";
+    echo "<input type=submit name='submitbtn' value='ADD TO BASKET' id='submitbtn'>";
+    //pass the product id to the next page basket.php as a hidden value
+    echo "<input type=hidden name=h_prodid value=".$prodid.">";
+    echo "</form>";
+    echo "</p>";
+
     echo "</td>";
     echo "</tr>";
 }
