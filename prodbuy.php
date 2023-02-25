@@ -41,10 +41,10 @@ while ($arrayp=mysqli_fetch_array($exeSQL))
     //create form made of one text field and one button for user to enter quantity
     //the value entered in the form will be posted to the basket.php to be processed
     echo "<form action=basket.php method=post>";
-    echo"<select name=>";
+    echo"<select name=p_quantity>";
     for ($count = 1 ; $count<=$arrayp['prodQuantity']; $count++){
-        echo "<option value=> $count </option>";
-    }
+        echo "<option value=$count> $count </option>";
+    };
     echo"</select>";
     echo "<input type=submit name='submitbtn' value='ADD TO BASKET' id='submitbtn'>";
     //pass the product id to the next page basket.php as a hidden value
