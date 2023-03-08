@@ -25,7 +25,7 @@ p{
 	width: 100%; 
 	font-family: 'Raleway', sans-serif;
 	border-style: None;
-    border-color: #fbfbfb;	
+    border-color: #fff;	
 } 
 
 #navbar{
@@ -154,7 +154,8 @@ p{
 	padding-top:50px;
 	margin-left:auto;
 	margin-right:auto;
-	background: #F8F8F8; 
+	background: #F8F8F8;
+	 
 }
 
 #content h4
@@ -188,7 +189,7 @@ p{
 table, th, td
 {
 	border-collapse:collapse;
-	
+	text-align: left;
 	border:1px solid #000;
 }
 
@@ -402,5 +403,5 @@ button:hover, #submitbtn:hover, .btn:hover{
 	border-right: 1px solid white;
 }
 	
-
+ 
 
