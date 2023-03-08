@@ -8,47 +8,61 @@ echo "<body>";
 include ("headfile.html"); //include header layout file 
 echo "<h4>".$pagename."</h4>"; //display name of the page on the web page
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  // retrieve form data
+  $firstname = $_POST['firstname'];
+  $lastname = $_POST['lastname'];
+  $email = $_POST['email'];
+  $address = $_POST['address'];
+  $postcode = $_POST['postcode'];
+  $phoneno = $_POST['phoneno'];
+  $password = $_POST['password'];
+  $confirm_password = $_POST['conpassword'];
 
+     // Check if any fields in the form were left empty
+  if (empty($firstname) || empty($lastname) || empty($address) || empty($postcode) || empty($phoneno) || empty($email) || empty($password) || empty($confirm_password)) {
+    echo "Please fill out all fields";
+    exit();
+  }
 
-$fname = $_POST['fname'];
-$lname =  $_POST['lname'];
-$address=  $_POST['Address'];
-$postCode=  $_POST['PostCode'];
-$telno=  $_POST['TelNo'];
-$email= $_POST['Email'];
-$password1=  $_POST['pass1'];
-$password2 =  $_POST['pass2'];
+  // Check if the 2 entered passwords match
+  if ($password != $confirm_password) {
+    echo "Passwords do not match";
+    exit();
+  }
 
-if($password1 == $password2){
-    $SQL = "INSERT INTO users( userFName, userSName, userAddress, userPostCode, userTelNo, userEmail, userPassword)
-VALUES ('$fname','$lname ','$address','$postCode','$telno','$email','$password1' )";
-if (mysqli_query($conn, $SQL)) {
-    echo "<h3>data stored in a database successfully."
-        . " Please browse your localhost php my admin"
-        . " to view the updated data</h3>";
-} else {
-    echo "ERROR: Hush! Sorry $SQL. "
-        . mysqli_error($conn);
-}
-// Close connection
-mysqli_close($conn);
-}else{
-    echo "Password not match ";
-}
+  // Define a regular expression to validate email address format
+  $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
 
- 
+  // Chech if the entered email already in use.
+  $sql_check_email = "SELECT * FROM Users WHERE userEmail='$email'";
+  $result_check_email = mysqli_query($conn, $sql_check_email);
+  if (mysqli_num_rows($result_check_email) > 0) {
+    echo "Email address is already in use";
+    exit(); 
+  }
+
+  // insert data into database table
+     // Write a SQL query to insert a new user into the users table
+    $SQL = "INSERT INTO user (userFName, userSName, userAddress, userPostCode, userTelNo, userEmail, userPassword)
+            VALUES ('$firstname', '$lastname', '$address', '$postcode', '$phoneno', '$email', '$password')";
+  
+    // Execute the INSERT INTO SQL query
+    if (mysqli_query($conn, $SQL)) {
+      echo "New user created successfully";
+    } else {
+        $sql_error_code = mysqli_errno($conn);
+        if ($sql_error_code == 1064) {
+          echo "Invalid characters in input fields";
+        } else {
+          echo "Error: " . mysqli_error($conn);
+        }
+    }
+  
+    // Close the database connection
+    mysqli_close($conn);}
 
 
 include("footfile.html"); //include head layout
 echo "</body>";
-
-echo"<script>";
-function clearForm() {
-    var form = document.querySelector('form'); // get the form element
-    var inputs = form.querySelectorAll('input'); // get all the input elements in the form
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = ''; // reset the value of each input to an empty string
-    }
-  }
-echo"</script>";
 ?>
