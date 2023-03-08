@@ -7,7 +7,8 @@ echo "<body>";
 include ("headfile.html"); //include header layout file
 echo "<h4>".$pagename."</h4>"; //display name of the page on the web page
 
-echo "<form action=signup_process.php method=post>";
+include("db.php");
+echo "<form action=login_process.php method=post>";
 echo "<table style='border: 0px'>";
 
 
