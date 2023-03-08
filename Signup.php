@@ -74,6 +74,7 @@ echo "</tr>";
 echo "<tr><input type=hidden name=cru_req value=signup>";
 echo "<td style='border: 0px'><button class=but type=submit>Sign Up</button></td>";
 echo "<td style='border: 0px'><button class=Clear onclick=clearForm()>Clear</button></td></tr>";
+echo "</table>";
 echo "</forme>";
 include("footfile.html"); //include head layout
 echo "</body>";
