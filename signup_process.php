@@ -38,6 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $sql_check_email = "SELECT * FROM Users WHERE userEmail='$email'";
   $result_check_email = mysqli_query($conn, $sql_check_email);
 
+  if (mysqli_num_rows($result_check_email) > 1) {
+    echo "Email address is already in use";
+    exit(); 
+  }
 
   // insert data into database table
      // Write a SQL query to insert a new user into the users table
