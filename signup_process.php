@@ -26,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   // Check if the 2 entered passwords match
-  if ($password != $confirm_password) {
-    echo "Passwords do not match";
-    exit();
-  }
+ // if ($password != $confirm_password) {
+//    echo "Passwords do not match";
+  //  exit();
+  //}
 
   // Define a regular expression to validate email address format
   $email_regex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
